@@ -1,0 +1,41 @@
+{
+    "parser": "babel-eslint",
+    "plugins": [
+        "react",
+        "airbnb"
+    ],
+    "rules": {
+        "no-undef": [
+            1
+        ],
+        "semi": [
+            0,
+            "never"
+        ],
+        "quotes": [
+            1,
+            "single",
+            "avoid-escape"
+        ],
+        "camelcase": [
+            1
+        ],
+        "react/jsx-curly-spacing": [
+            2,
+            "always"
+        ],
+        "prefer-const": 1,
+        "indent": [
+            "error",
+            2
+        ],
+        "no-var": 2,
+        "comma-dangle": "off",
+        "prefer-destructuring": "error",
+        "prefer-arrow-callback": "error",
+        "prefer-template": "error",
+        "eqeqeq": "error",
+        "require-await": "error",
+        "wrap-iife": "error"
+    }
+}

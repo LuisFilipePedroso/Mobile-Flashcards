@@ -1,6 +1,0 @@
-{
-    "singleQuote": true,
-    "semi": false,
-    "jsxSingleQuote": true,
-    "plugins": ["react", "react-native"],
-}

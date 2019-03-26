@@ -63,13 +63,13 @@ export default class App extends React.Component {
     })
 
     return (
-      <SafeAreaView style={styles.container}>
-        <TouchableOpacity onPress={this.handleRotate} style={styles.button}>
-          <Text style={styles.text}>Rotate</Text>
+      <SafeAreaView style={ styles.container }>
+        <TouchableOpacity onPress={ this.handleRotate } style={ styles.button }>
+          <Text style={ styles.text }>Rotate</Text>
         </TouchableOpacity>
         {showingBack === false && (
           <Animated.View
-            style={[{ transform: [{ rotateY: RotateData }] }, styles.height]}
+            style={ [{ transform: [{ rotateY: RotateData }] }, styles.height] }
           >
             <Front />
           </Animated.View>
@@ -77,7 +77,7 @@ export default class App extends React.Component {
 
         {showingBack === true && (
           <Animated.View
-            style={[{ transform: [{ rotateY: RotateData1 }] }, styles.height]}
+            style={ [{ transform: [{ rotateY: RotateData1 }] }, styles.height] }
           >
             <Back />
           </Animated.View>
