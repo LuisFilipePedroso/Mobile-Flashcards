@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { SafeAreaView, FlatList, Text } from 'react-native'
 import Deck from './Deck'
 import { connect } from 'react-redux'
-import { Font } from 'expo'
+import { Font, AppLoading } from 'expo'
 
 class DeckList extends Component {
   state = {
@@ -26,7 +26,7 @@ class DeckList extends Component {
     return (
       <SafeAreaView style={{ flex: 1 }}>
         {isLoaded === false
-          ? <Text>Loading...</Text>
+          ? <AppLoading />
           : <FlatList
             data={decks}
             renderItem={({ item }) =>
