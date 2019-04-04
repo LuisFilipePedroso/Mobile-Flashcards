@@ -20,7 +20,7 @@ class DeckList extends Component {
   }
 
   render() {
-    const { decks } = this.props
+    const { decks, navigation } = this.props
     const { isLoaded } = this.state
 
     return (
@@ -35,7 +35,8 @@ class DeckList extends Component {
                 id={item.id}
                 title={item.title}
                 qtdCard={item.questions.length}
-                bgColor={item.cardBgColor} />}
+                bgColor={item.cardBgColor}
+                navigation={navigation} />}
             keyExtractor={(item, index) => index.toString()}
           />
         }

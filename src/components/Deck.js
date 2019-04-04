@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
-import { SafeAreaView, Text, StyleSheet } from 'react-native'
+import { SafeAreaView, Text, StyleSheet, TouchableHighlight } from 'react-native'
 
 
 export default class Deck extends Component {
     render() {
-        const { title, qtdCard, bgColor, id } = this.props
-        
+        const { title, qtdCard, bgColor, id, navigation } = this.props
+        console.log(navigation)
+
         return (
-            <SafeAreaView style={[styles.container, { backgroundColor: bgColor }]}>
-                <Text style={styles.title}> {title} </Text>
-                <Text style={styles.subtitle}> {qtdCard} cards</Text>
-            </SafeAreaView >
+            <TouchableHighlight onPress={() => navigation.navigate('DeckDetail', { id, title })}>
+                <SafeAreaView style={[styles.container, { backgroundColor: bgColor }]}>
+                    <Text style={styles.title}> {title} </Text>
+                    <Text style={styles.subtitle}> {qtdCard} cards</Text>
+                </SafeAreaView >
+            </TouchableHighlight>
         )
     }
 }

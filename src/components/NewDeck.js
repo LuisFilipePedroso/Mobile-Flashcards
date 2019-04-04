@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, KeyboardAvoidingView } from 'react-native'
 import { handleAddDeck as addDeck } from '../actions/decks'
 import { connect } from 'react-redux'
+import { generateUID } from '../utils/data'
 
 class New extends Component {
   state = {
@@ -10,14 +11,24 @@ class New extends Component {
 
   handleAddDeck = () => {
     const { text: title } = this.state
-    const { dispatch } = this.props
+    const { dispatch, navigation } = this.props
+    const id = generateUID()
+
     const deck = {
-      title
+      id,
+      title,
+      questions: [],
+      cardBgColor: '#f2b5d3'
     }
 
     dispatch(addDeck(deck))
     this.setState({
       text: ""
+    })
+
+    navigation.navigate('DeckDetail', {
+      id,
+      title
     })
   }
 

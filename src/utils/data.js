@@ -75,7 +75,7 @@ export let decks = [
   },
 ]
 
-function generateUID() {
+export function generateUID() {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
 
@@ -106,13 +106,6 @@ export function addDeck(deck) {
   return new Promise((res, rej) => {
 
     setTimeout(() => {
-      deck = {
-        id: generateUID(),
-        questions: [],
-        cardBgColor: '#f2b5d3',
-        ...deck
-      }
-
       decks = decks.concat({
         ...decks,
         ...deck

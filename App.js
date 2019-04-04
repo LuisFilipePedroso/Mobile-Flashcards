@@ -3,6 +3,7 @@ import { Platform, TouchableOpacity, StyleSheet, Text, SafeAreaView } from 'reac
 import { createStackNavigator, createDrawerNavigator, createAppContainer } from 'react-navigation'
 import New from './src/components/NewDeck'
 import DeckList from './src/components/DeckList'
+import DeckDetail from './src/components/DeckDetail'
 import { Entypo, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { Provider } from 'react-redux'
 import reducer from './src/reducers'
@@ -23,6 +24,15 @@ const DecksNavigator = createStackNavigator({
         : <Ionicons name='md-menu' style={styles.hamburguerMenu} />
     }),
   },
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: () => ({
+      headerStyle: {
+        backgroundColor: '#00bbea',
+      },
+      headerTintColor: '#fff',
+    })
+  }
 })
 
 const NewDeckNavigator = createStackNavigator({
@@ -39,6 +49,15 @@ const NewDeckNavigator = createStackNavigator({
           <Ionicons name='ios-menu' style={styles.hamburguerMenu} />
         </TouchableOpacity>
         : <Ionicons name='md-menu' style={styles.hamburguerMenu} />
+    })
+  },
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: () => ({
+      headerStyle: {
+        backgroundColor: '#00bbea',
+      },
+      headerTintColor: '#fff',
     })
   }
 })
