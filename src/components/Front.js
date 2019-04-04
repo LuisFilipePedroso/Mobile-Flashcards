@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { SafeAreaView, Text, StyleSheet } from 'react-native';
 
 export default class Front extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
 
   render() {
     return (

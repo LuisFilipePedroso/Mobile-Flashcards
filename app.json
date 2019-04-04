@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Mobile Flashcards",
-    "slug": "MobileFlashcards",
+    "name": "MobileFlashcard",
+    "slug": "MobileFlashcard",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
