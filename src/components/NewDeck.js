@@ -2,26 +2,27 @@ import React, { Component } from 'react'
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, KeyboardAvoidingView } from 'react-native'
 import { handleAddDeck as addDeck } from '../actions/decks'
 import { connect } from 'react-redux'
-import { generateUID } from '../utils/data'
+import { generateUID, generateColor } from '../utils/data'
 
 class New extends Component {
   state = {
     text: ""
   }
 
-  handleAddDeck = () => {
+  handleAddDeck = async () => {
     const { text: title } = this.state
     const { dispatch, navigation } = this.props
     const id = generateUID()
+    console.log(generateColor())
 
     const deck = {
       id,
       title,
       questions: [],
-      cardBgColor: '#f2b5d3'
+      cardBgColor: generateColor()
     }
 
-    dispatch(addDeck(deck))
+    await dispatch(addDeck(deck))
     this.setState({
       text: ""
     })
@@ -33,27 +34,26 @@ class New extends Component {
   }
 
   render() {
-    const { decks } = this.props
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding" keyboardVerticalOffset="65">
         <View style={styles.card}>
           <Text style={styles.cardTitle}>What's the title of your deck?</Text>
           <View style={styles.cardBody}>
             <TextInput
               onChangeText={(text) => this.setState({ text })}
-              style={[styles.input, { width: Dimensions.get('window').width - 50 }]}
+              style={[styles.input, { width: Dimensions.get('window').width - 120 }]}
               value={this.state.text}
               placeholder="Your deck title" />
           </View>
-          <View style={[styles.cardFooter, { width: Dimensions.get('window').width - 30 }]}>
+          <View style={[styles.cardFooter, { width: Dimensions.get('window').width - 75 }]}>
             <TouchableOpacity
               onPress={this.handleAddDeck}
-              style={[styles.btnSave, { width: Dimensions.get('window').width - 50 }]}>
+              style={[styles.btnSave, { width: Dimensions.get('window').width - 75 }]}>
               <Text style={styles.btnText}>Create deck</Text>
             </TouchableOpacity>
           </View>
         </View>
-      </View >
+      </KeyboardAvoidingView >
     );
   }
 }
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#00bbea',
   },
   card: {
-    width: 350,
+    width: 300,
     height: 350,
     borderWidth: 1,
     borderColor: '#fff',
@@ -102,6 +102,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#efffc1',
     justifyContent: 'center',
     alignItems: 'center',
+    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 10,
   },
   btnSave: {
     height: 35,

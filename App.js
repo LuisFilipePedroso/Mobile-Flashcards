@@ -4,6 +4,8 @@ import { createStackNavigator, createDrawerNavigator, createAppContainer } from 
 import New from './src/components/NewDeck'
 import DeckList from './src/components/DeckList'
 import DeckDetail from './src/components/DeckDetail'
+import NewQuestion from './src/components/NewQuestion'
+import Play from './src/components/Play'
 import { Entypo, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import { Provider } from 'react-redux'
 import reducer from './src/reducers'
@@ -17,6 +19,10 @@ const DecksNavigator = createStackNavigator({
     screen: DeckList,
     navigationOptions: ({ navigation }) => ({
       title: 'Decks',
+      headerStyle: {
+        backgroundColor: '#00bbea',
+      },
+      headerTintColor: '#fff',
       headerLeft: Platform.OS === 'ios'
         ? <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
           <Ionicons name='ios-menu' style={styles.hamburguerMenu} />
@@ -27,6 +33,25 @@ const DecksNavigator = createStackNavigator({
   DeckDetail: {
     screen: DeckDetail,
     navigationOptions: () => ({
+      headerStyle: {
+        backgroundColor: '#00bbea',
+      },
+      headerTintColor: '#fff',
+    })
+  },
+  NewQuestion: {
+    screen: NewQuestion,
+    navigationOptions: () => ({
+      headerStyle: {
+        backgroundColor: '#00bbea',
+      },
+      headerTintColor: '#fff',
+    })
+  },
+  Play: {
+    screen: Play,
+    navigationOptions: () => ({
+      title: "Quiz",
       headerStyle: {
         backgroundColor: '#00bbea',
       },
@@ -83,6 +108,7 @@ const styles = StyleSheet.create({
   hamburguerMenu: {
     fontSize: 30,
     marginLeft: 10,
+    color: '#fff'
   }
 })
 

@@ -1,15 +1,13 @@
-import React, { Component } from 'react';
-import { SafeAreaView, Text, StyleSheet } from 'react-native';
+import React, { Component } from 'react'
+import { SafeAreaView, Text, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
 
-export default class Front extends Component {
-
-  render() {
-    return (
-      <SafeAreaView style={styles.container}>
-        <Text style={{ fontSize: 22, color: '#fff' }}> Front </Text>
-      </SafeAreaView>
-    );
-  }
+export default function Front({ question }) {
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.textAnswer}> { question } </Text>
+    </SafeAreaView>
+  )
 }
 
 const styles = StyleSheet.create({
@@ -17,11 +15,17 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 300,
     height: 500,
-    backgroundColor: '#333',
-    borderRadius: 5,
+    backgroundColor: 'white',
+    borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#333',
+    borderColor: 'white',
     justifyContent: 'center',
-    alignItems: 'center'
-  }
-});
+    alignItems: 'center',
+  },
+  textAnswer: {
+    fontSize: 30,
+    color: 'black',
+    fontFamily: 'MontserratSemiBold',
+    textAlign: 'center'
+  },
+})
