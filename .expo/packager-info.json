@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": null,
-  "packagerPid": null,
+  "packagerPort": 19001,
+  "packagerPid": 1123,
   "expoServerNgrokUrl": "https://ja-8df.anonymous.mobileflashcard.exp.direct",
   "packagerNgrokUrl": "https://packager.ja-8df.anonymous.mobileflashcard.exp.direct",
-  "ngrokPid": 9914
+  "ngrokPid": 1144
 }

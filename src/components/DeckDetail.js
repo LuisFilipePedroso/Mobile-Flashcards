@@ -34,7 +34,7 @@ class DeckDetail extends Component {
                             <View style={[styles.cardFooter, { width: Dimensions.get('window').width - 75 }]}>
                                 <TouchableOpacity
                                     style={[styles.btnSave, { width: Dimensions.get('window').width - 75 }]}
-                                    onPress={() => navigation.navigate('Play', { id })}>
+                                    onPress={() => navigation.navigate('Play', { id, title })}>
                                     <Text style={styles.btnText}>Start Quiz</Text>
                                 </TouchableOpacity>
                             </View>

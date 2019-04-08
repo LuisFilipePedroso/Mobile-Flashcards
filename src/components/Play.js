@@ -4,13 +4,14 @@ import {
     Text,
     Animated,
     TouchableOpacity,
-    SafeAreaView,
     View,
-    ImageBackground
+    ImageBackground,
+    Dimensions
 } from 'react-native'
 import Front from './Front'
 import Back from './Back'
 import { connect } from 'react-redux'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 class Play extends Component {
 
@@ -76,7 +77,8 @@ class Play extends Component {
 
     render() {
         const { showingBack, rotate, index, qtdOfCorrectAnswer } = this.state
-        const { deck } = this.props
+        const { deck, navigation } = this.props
+        const { id, title } = navigation.state.params
         const { questions } = deck
 
         const RotateData = rotate.interpolate({
@@ -99,10 +101,19 @@ class Play extends Component {
                         {grade >= 60
                             ? <Text style={[styles.resultText, { color: '#4cae4c' }]}>{grade}%. You Rock 😁</Text>
                             : <Text style={[styles.resultText, { color: '#d43f3a' }]}>You did {grade}% ☹️</Text>}
+                    </View>
+                    <View style={[styles.cardFooter, { width: Dimensions.get('window').width - 75 }]}>
                         <TouchableOpacity
-                            style={[styles.button, styles.btnSuccess, { marginTop: 25 }]}
+                            style={[styles.btnBackToDeck, { width: Dimensions.get('window').width - 75 }]}
+                            onPress={() => navigation.navigate('DeckDetail', { id, title })}>
+                            <Text style={styles.btnBackToDeckText}>Back to Deck</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.containerBottom}>
+                        <TouchableOpacity
+                            style={[styles.btnRestartQuiz, { width: Dimensions.get('window').width - 50 }]}
                             onPress={this.resetData}>
-                            <Text style={styles.btnTextWhite}>Back to Deck</Text>
+                            <Text style={styles.btnRestartQuizText}>Restart Quiz</Text>
                         </TouchableOpacity>
                     </View>
                 </ImageBackground >
@@ -120,9 +131,12 @@ class Play extends Component {
                                 style={[{ transform: [{ rotateY: RotateData }] }, styles.height]}>
                                 <Front question={questions[index].question} />
                             </Animated.View>
-                            <View style={styles.btnGroup}>
+                            <View style={[styles.cardFooterNoBg, { width: Dimensions.get('window').width - 75 }]}>
                                 <TouchableOpacity onPress={() => this.handleRotate()} style={styles.button}>
-                                    <Text style={styles.btnText}>Show Answer</Text>
+                                    <View style={{flexDirection: 'row'}}>
+                                        <MaterialCommunityIcons name='rotate-3d' size={25} style={{ marginRight: 10, color: '#939292'}}/>
+                                        <Text style={styles.btnText}>Show Answer</Text>
+                                    </View>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -189,7 +203,7 @@ const styles = StyleSheet.create({
         borderRadius: 0,
     },
     btnText: {
-        fontSize: 20,
+        fontSize: 16,
         color: '#939292',
         fontFamily: 'MontserratSemiBold',
     },
@@ -200,6 +214,25 @@ const styles = StyleSheet.create({
     },
     height: {
         height: 500
+    },
+    cardFooter: {
+        height: 50,
+        backgroundColor: '#efffc1',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: 80,
+        borderBottomRightRadius: 10,
+        borderBottomLeftRadius: 10,
+    },
+    cardFooterNoBg: {
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: 5,
+        borderBottomRightRadius: 10,
+        borderBottomLeftRadius: 10,
     },
     resultContainer: {
         width: 300,
@@ -216,6 +249,28 @@ const styles = StyleSheet.create({
         color: 'black',
         fontFamily: 'MontserratSemiBold',
         textAlign: 'center'
+    },
+    btnRestartQuiz: {
+        alignItems: 'center',
+    },
+    btnRestartQuizText: {
+        color: '#fff',
+        fontFamily: 'MontserratSemiBold',
+        fontSize: 14
+    },
+    containerBottom: {
+        position: 'absolute',
+        bottom: 40,
+    },
+    btnBackToDeck: {
+        height: 35,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    btnBackToDeckText: {
+        fontSize: 20,
+        color: '#99bf1c',
+        fontFamily: 'MontserratSemiBold',
     },
 })
 
