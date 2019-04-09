@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, KeyboardAvoidingView } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions, KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
 import { handleAddDeck as addDeck } from '../actions/decks'
 import { connect } from 'react-redux'
 import { generateUID, generateColor } from '../utils/data'
+import { Header } from 'react-navigation'
 
 class New extends Component {
   state = {
@@ -35,7 +36,10 @@ class New extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView style={styles.container} behavior="padding" keyboardVerticalOffset="65">
+      <KeyboardAvoidingView 
+        style={styles.container} 
+        behavior= {(Platform.OS === 'ios')? "padding" : null} 
+        keyboardVerticalOffset={Header.HEIGHT + 20}>
         <View style={styles.card}>
           <Text style={styles.cardTitle}>What's the title of your deck?</Text>
           <View style={styles.cardBody}>
@@ -45,10 +49,18 @@ class New extends Component {
               value={this.state.text}
               placeholder="Your deck title" />
           </View>
-          <View style={[styles.cardFooter, { width: Dimensions.get('window').width - 75 }]}>
+          <View style={[styles.cardFooter, {
+            width: Platform.OS === 'ios'
+              ? Dimensions.get('window').width - 75
+              : Dimensions.get('window').width - 90
+          }]}>
             <TouchableOpacity
               onPress={this.handleAddDeck}
-              style={[styles.btnSave, { width: Dimensions.get('window').width - 75 }]}>
+              style={[styles.btnSave, {
+                width: Platform.OS === 'ios'
+                  ? Dimensions.get('window').width - 75
+                  : Dimensions.get('window').width - 90
+              }]}>
               <Text style={styles.btnText}>Create deck</Text>
             </TouchableOpacity>
           </View>

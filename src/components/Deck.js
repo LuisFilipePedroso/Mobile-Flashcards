@@ -7,7 +7,7 @@ export default class Deck extends Component {
         const { title, qtdCard, bgColor, id, navigation } = this.props
         return (
             <TouchableHighlight onPress={() => navigation.navigate('DeckDetail', { id, title })}>
-                <SafeAreaView style={[styles.container, { backgroundColor: bgColor, height: Dimensions.get('window').height / 6 }]}>
+                <SafeAreaView style={[styles.container, { backgroundColor: bgColor, height: Dimensions.get('window').height / 4 }]}>
                     <Text style={styles.title}> {title} </Text>
                     <Text style={styles.subtitle}> {qtdCard} cards</Text>
                 </SafeAreaView >

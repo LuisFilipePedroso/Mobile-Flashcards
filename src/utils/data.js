@@ -47,17 +47,6 @@ export let decks = [
     ],
     cardBgColor: '#006666'
   },
-  {
-    id: '4e7a2a9eda586',
-    title: 'HTML',
-    questions: [
-      {
-        question: 'What is HTML?',
-        answer: 'Hypertext Markup Language'
-      }
-    ],
-    cardBgColor: '#ff0066'
-  },
 ]
 
 const colors = ['#ffff66', '#ff00bf', '#006666', '#191966', '#ccffff', '#ccffe6']

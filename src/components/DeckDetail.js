@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, ImageBackground, StyleSheet, Dimensions, TouchableOpacity } from 'react-native'
+import { View, Text, ImageBackground, StyleSheet, Dimensions, TouchableOpacity, Platform, SafeAreaView } from 'react-native'
 import { connect } from 'react-redux'
 
 class DeckDetail extends Component {
@@ -13,42 +13,49 @@ class DeckDetail extends Component {
     }
 
     render() {
-        const { navigation, deck, qtdOfCards } = this.props
+        const { navigation, qtdOfCards } = this.props
         const { id, title } = navigation.state.params
         const random = Math.random() * 100
 
         return (
-            <ImageBackground
-                source={require('../images/background.jpg')}
-                style={styles.bgImage} key={random}>
-                <View style={styles.container}>
-                    <View style={styles.card}>
-                        <Text style={styles.cardTitle}>{title}</Text>
-                        <View style={styles.cardBody}>
-                            {qtdOfCards === 0
-                                ? <Text style={styles.textInfo}> Deck is empty </Text>
-                                : <Text style={styles.textInfo}> {qtdOfCards} cards </Text>
-                            }
-                        </View>
-                        {qtdOfCards > 0 &&
-                            <View style={[styles.cardFooter, { width: Dimensions.get('window').width - 75 }]}>
-                                <TouchableOpacity
-                                    style={[styles.btnSave, { width: Dimensions.get('window').width - 75 }]}
-                                    onPress={() => navigation.navigate('Play', { id, title })}>
-                                    <Text style={styles.btnText}>Start Quiz</Text>
-                                </TouchableOpacity>
-                            </View>
+            // <ImageBackground
+            //     source={require('../images/background-min.jpg')}
+            //     style={styles.bgImage} key={random}>
+            <SafeAreaView style={styles.container}>
+                <View style={styles.card}>
+                    <Text style={styles.cardTitle}>{title}</Text>
+                    <View style={styles.cardBody}>
+                        {qtdOfCards === 0
+                            ? <Text style={styles.textInfo}> Deck is empty </Text>
+                            : <Text style={styles.textInfo}> {qtdOfCards} cards </Text>
                         }
                     </View>
-                    <View style={styles.containerBottom}>
-                        <TouchableOpacity
-                            style={[styles.btnAddCard, { width: Dimensions.get('window').width - 50 }]}
-                            onPress={() => navigation.navigate('NewQuestion', { id, title, navigation })}>
-                            <Text style={styles.btnAddCardText}>Add Card</Text>
-                        </TouchableOpacity>
-                    </View>
+                    {qtdOfCards > 0 &&
+                        <View style={[styles.cardFooter, {
+                            width: Platform.OS === 'ios'
+                                ? Dimensions.get('window').width - 75
+                                : Dimensions.get('window').width - 90
+                        }]}>
+                            <TouchableOpacity
+                                style={[styles.btnSave, {
+                                    width: Platform.OS === 'ios'
+                                        ? Dimensions.get('window').width - 75
+                                        : Dimensions.get('window').width - 90
+                                }]}
+                                onPress={() => navigation.navigate('Play', { id, title })}>
+                                <Text style={styles.btnText}>Start Quiz</Text>
+                            </TouchableOpacity>
+                        </View>
+                    }
                 </View>
-            </ImageBackground>
+                <View style={styles.containerBottom}>
+                    <TouchableOpacity
+                        style={[styles.btnAddCard, { width: Dimensions.get('window').width - 50 }]}
+                        onPress={() => navigation.navigate('NewQuestion', { id, title, navigation })}>
+                        <Text style={styles.btnAddCardText}>Add Card</Text>
+                    </TouchableOpacity>
+                </View>
+            </SafeAreaView>
         );
     }
 }
@@ -72,6 +79,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#00bbea',
     },
     card: {
         width: 300,

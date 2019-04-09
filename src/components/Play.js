@@ -6,7 +6,8 @@ import {
     TouchableOpacity,
     View,
     ImageBackground,
-    Dimensions
+    Dimensions,
+    SafeAreaView
 } from 'react-native'
 import Front from './Front'
 import Back from './Back'
@@ -94,9 +95,10 @@ class Play extends Component {
         if (index === questions.length) {
             const grade = (qtdOfCorrectAnswer / questions.length) * 100
             return (
-                <ImageBackground
-                    source={require('../images/background.jpg')}
-                    style={[styles.bgImage, { justifyContent: 'center', alignItems: 'center' }]}>
+                // <ImageBackground
+                //     source={require('../images/background-min.jpg')}
+                //     style={[styles.bgImage, { justifyContent: 'center', alignItems: 'center' }]}>
+                <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#00bbea' }}>
                     <View style={styles.resultContainer}>
                         {grade >= 60
                             ? <Text style={[styles.resultText, { color: '#4cae4c' }]}>{grade}%. You Rock 😁</Text>
@@ -109,63 +111,62 @@ class Play extends Component {
                             <Text style={styles.btnBackToDeckText}>Back to Deck</Text>
                         </TouchableOpacity>
                     </View>
-                    <View style={styles.containerBottom}>
+                    <View style={[styles.containerBottom]}>
                         <TouchableOpacity
                             style={[styles.btnRestartQuiz, { width: Dimensions.get('window').width - 50 }]}
                             onPress={this.resetData}>
                             <Text style={styles.btnRestartQuizText}>Restart Quiz</Text>
                         </TouchableOpacity>
                     </View>
-                </ImageBackground >
+                </SafeAreaView >
             )
         }
 
         return (
-            <ImageBackground
-                source={require('../images/background.jpg')}
-                style={styles.bgImage}>
-                <View style={styles.container}>
-                    {showingBack === false && (
-                        <View>
-                            <Animated.View
-                                style={[{ transform: [{ rotateY: RotateData }] }, styles.height]}>
-                                <Front question={questions[index].question} />
-                            </Animated.View>
-                            <View style={[styles.cardFooterNoBg, { width: Dimensions.get('window').width - 75 }]}>
-                                <TouchableOpacity onPress={() => this.handleRotate()} style={styles.button}>
-                                    <View style={{flexDirection: 'row'}}>
-                                        <MaterialCommunityIcons name='rotate-3d' size={25} style={{ marginRight: 10, color: '#939292'}}/>
-                                        <Text style={styles.btnText}>Show Answer</Text>
-                                    </View>
-                                </TouchableOpacity>
-                            </View>
+            // <ImageBackground
+            //     source={require('../images/background-min.jpg')}
+            //     style={styles.bgImage}>
+            <SafeAreaView style={styles.container}>
+                {showingBack === false && (
+                    <View>
+                        <Animated.View
+                            style={[{ transform: [{ rotateY: RotateData }] }, styles.height]}>
+                            <Front question={questions[index].question} />
+                        </Animated.View>
+                        <View style={[styles.cardFooterNoBg, { width: Dimensions.get('window').width - 75 }]}>
+                            <TouchableOpacity onPress={() => this.handleRotate()} style={styles.button}>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <MaterialCommunityIcons name='rotate-3d' size={25} style={{ marginRight: 10, color: '#939292' }} />
+                                    <Text style={styles.btnText}>Show Answer</Text>
+                                </View>
+                            </TouchableOpacity>
                         </View>
-                    )}
+                    </View>
+                )}
 
-                    {showingBack === true && (
-                        <View>
-                            <Animated.View
-                                style={[{ transform: [{ rotateY: RotateData1 }] }, styles.height]}>
-                                <Back
-                                    answer={questions[index].answer}
-                                    handleRotate={this.handleRotate} />
-                            </Animated.View>
-                            <View style={styles.btnGroup}>
-                                <TouchableOpacity
-                                    onPress={() => this.handleRotate(() => this.handleScore(false))}
-                                    style={[styles.button, styles.btnDanger, { borderBottomLeftRadius: 10 }]}>
-                                    <Text style={styles.btnTextWhite}>Incorrect</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    onPress={() => this.handleRotate(() => this.handleScore(true))}
-                                    style={[styles.button, styles.btnSuccess, { borderBottomRightRadius: 10 }]}>
-                                    <Text style={styles.btnTextWhite}>Correct</Text>
-                                </TouchableOpacity>
-                            </View>
+                {showingBack === true && (
+                    <View>
+                        <Animated.View
+                            style={[{ transform: [{ rotateY: RotateData1 }] }, styles.height]}>
+                            <Back
+                                answer={questions[index].answer}
+                                handleRotate={this.handleRotate} />
+                        </Animated.View>
+                        <View style={styles.btnGroup}>
+                            <TouchableOpacity
+                                onPress={() => this.handleRotate(() => this.handleScore(false))}
+                                style={[styles.button, styles.btnDanger, { borderBottomLeftRadius: 10 }]}>
+                                <Text style={styles.btnTextWhite}>Incorrect</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => this.handleRotate(() => this.handleScore(true))}
+                                style={[styles.button, styles.btnSuccess, { borderBottomRightRadius: 10 }]}>
+                                <Text style={styles.btnTextWhite}>Correct</Text>
+                            </TouchableOpacity>
                         </View>
-                    )}
-                </View>
-            </ImageBackground>
+                    </View>
+                )}
+            </SafeAreaView>
         )
     }
 }
@@ -178,6 +179,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#00bbea',
     },
     button: {
         width: 300,
@@ -188,16 +190,18 @@ const styles = StyleSheet.create({
     },
     btnGroup: {
         flexDirection: 'row',
-        height: 35,
+        height: 50,
     },
     btnDanger: {
         width: 150,
+        height: 50,
         borderColor: '#d43f3a',
         backgroundColor: '#d9534f',
         borderRadius: 0,
     },
     btnSuccess: {
         width: 150,
+        height: 50,
         borderColor: '#4cae4c',
         backgroundColor: '#5cb85c',
         borderRadius: 0,
@@ -221,7 +225,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
-        bottom: 80,
+        bottom: 50,
         borderBottomRightRadius: 10,
         borderBottomLeftRadius: 10,
     },
@@ -260,7 +264,7 @@ const styles = StyleSheet.create({
     },
     containerBottom: {
         position: 'absolute',
-        bottom: 40,
+        bottom: 25,
     },
     btnBackToDeck: {
         height: 35,

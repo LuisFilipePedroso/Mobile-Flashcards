@@ -11,6 +11,7 @@ import { Provider } from 'react-redux'
 import reducer from './src/reducers'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
+import { setLocalNotification } from './src/utils/helpers'
 
 const middleware = applyMiddleware(thunk)
 
@@ -20,21 +21,26 @@ const DecksNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: 'Decks',
       headerStyle: {
-        backgroundColor: '#00bbea',
+        backgroundColor: '#00b5e2',
+        borderBottomWidth: 1,
+        borderBottomColor: '#00b5e2',
       },
       headerTintColor: '#fff',
       headerLeft: Platform.OS === 'ios'
         ? <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
           <Ionicons name='ios-menu' style={styles.hamburguerMenu} />
+        </TouchableOpacity >
+        : <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+          <Ionicons name='md-menu' style={styles.hamburguerMenu} />
         </TouchableOpacity>
-        : <Ionicons name='md-menu' style={styles.hamburguerMenu} />
     }),
   },
   DeckDetail: {
     screen: DeckDetail,
     navigationOptions: () => ({
       headerStyle: {
-        backgroundColor: '#00bbea',
+        backgroundColor: '#00b5e2',
+        borderBottomColor: '#00b5e2',
       },
       headerTintColor: '#fff',
     })
@@ -43,7 +49,8 @@ const DecksNavigator = createStackNavigator({
     screen: NewQuestion,
     navigationOptions: () => ({
       headerStyle: {
-        backgroundColor: '#00bbea',
+        backgroundColor: '#00b5e2',
+        borderBottomColor: '#00b5e2',
       },
       headerTintColor: '#fff',
     })
@@ -53,7 +60,8 @@ const DecksNavigator = createStackNavigator({
     navigationOptions: () => ({
       title: "Quiz",
       headerStyle: {
-        backgroundColor: '#00bbea',
+        backgroundColor: '#00b5e2',
+        borderBottomColor: '#00b5e2',
       },
       headerTintColor: '#fff',
     })
@@ -66,14 +74,17 @@ const NewDeckNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: 'Decks',
       headerStyle: {
-        backgroundColor: '#00bbea',
+        backgroundColor: '#00b5e2',
+        borderBottomColor: '#00b5e2',
       },
       headerTintColor: '#fff',
       headerLeft: Platform.OS === 'ios'
         ? <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
           <Ionicons name='ios-menu' style={styles.hamburguerMenu} />
         </TouchableOpacity>
-        : <Ionicons name='md-menu' style={styles.hamburguerMenu} />
+        : <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+          <Ionicons name='md-menu' style={styles.hamburguerMenu} />
+        </TouchableOpacity>
     })
   },
   DeckDetail: {
@@ -81,6 +92,7 @@ const NewDeckNavigator = createStackNavigator({
     navigationOptions: () => ({
       headerStyle: {
         backgroundColor: '#00bbea',
+        borderBottomColor: '#00bbea',
       },
       headerTintColor: '#fff',
     })
@@ -115,6 +127,9 @@ const styles = StyleSheet.create({
 const MainNavigator = createAppContainer(DrawerNavigator)
 
 export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification()
+  } 
 
   render() {
     return (
